@@ -1,10 +1,10 @@
-package jjfactory.api.user;
+package jjfactory.api.feedback;
 
 import jjfactory.common.user.domain.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface FeedbackService {
     Long create();
     Long delete();
     User get(Long id);
