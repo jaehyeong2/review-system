@@ -3,3 +3,4 @@ rootProject.name = 'communicate'
 
 include 'api'
 include 'common'
+include 'batch'
