@@ -1,6 +1,7 @@
 package jjfactory.api.feedback;
 
-import jjfactory.common.feedback.infra.FeedbackRepository;
+import jjfactory.common.feedback.domain.Feedback;
+import jjfactory.common.feedback.domain.FeedbackReader;
 import jjfactory.common.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
-    private final FeedbackRepository feedbackRepository;
+    private final FeedbackReader feedbackReader;
     @Override
     public Long create() {
         return null;
@@ -27,7 +28,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public List<User> getList() {
+    public List<Feedback> getList() {
         return null;
     }
 
