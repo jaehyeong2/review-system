@@ -1,7 +1,7 @@
 package jjfactory.api.user;
 
 import jjfactory.common.user.domain.User;
-import jjfactory.common.user.infra.UserRepository;
+import jjfactory.common.user.domain.UserReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
+    private final UserReader userReader;
     @Override
     public Long create() {
         return null;
@@ -28,6 +28,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getList() {
+        return null;
+    }
+
+    @Override
+    public Long update() {
         return null;
     }
 }
