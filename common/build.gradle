@@ -30,6 +30,9 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
 
 	//querydsl 설정 추가
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
