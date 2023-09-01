@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.util.StringUtils;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -30,6 +31,11 @@ public class Feedback {
         this.sendUserId = sendUserId;
         this.receiveUserId = receiveUserId;
         this.content = content;
+        this.type = type;
+    }
+
+    public void update(String content, Type type){
+        if(StringUtils.hasText(content)) this.content = content;
         this.type = type;
     }
 }
