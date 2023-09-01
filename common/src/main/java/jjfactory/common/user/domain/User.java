@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -30,6 +32,11 @@ public class User {
     private String employeeNumber;
     private boolean isValid = true;
     private LocalDateTime invalidDt;
+
+    @CreationTimestamp
+    private LocalDateTime createDt;
+    @UpdateTimestamp
+    private LocalDateTime updateDt;
 
     @Builder
     public User(Long teamId, String name, String username, String email, String employeeNumber) {

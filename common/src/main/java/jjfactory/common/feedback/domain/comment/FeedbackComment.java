@@ -3,6 +3,10 @@ package jjfactory.common.feedback.domain.comment;
 import jakarta.persistence.*;
 import jjfactory.common.feedback.domain.Feedback;
 import jjfactory.common.user.domain.User;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class FeedbackComment {
@@ -16,4 +20,10 @@ public class FeedbackComment {
     private Feedback feedback;
 
     private String content;
+
+    @CreationTimestamp
+    private LocalDateTime createDt;
+    @UpdateTimestamp
+    private LocalDateTime updateDt;
+
 }
