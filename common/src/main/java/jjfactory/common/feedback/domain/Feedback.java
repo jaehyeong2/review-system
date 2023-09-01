@@ -1,18 +1,20 @@
 package jjfactory.common.feedback.domain;
 
 import jakarta.persistence.*;
-import jjfactory.common.user.domain.User;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 @Entity
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User sendUser;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User receiveUser;
+    private Long sendUserId;
+    private Long receiveUserId;
 
     private String content;
 
@@ -21,5 +23,13 @@ public class Feedback {
 
     public enum Type{
 
+    }
+
+    @Builder
+    public Feedback(Long sendUserId, Long receiveUserId, String content, Type type) {
+        this.sendUserId = sendUserId;
+        this.receiveUserId = receiveUserId;
+        this.content = content;
+        this.type = type;
     }
 }
