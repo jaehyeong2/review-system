@@ -6,4 +6,5 @@ import org.mapstruct.Mapper;
 public interface UserMapper {
 
     UserInfo.DetailResponse of(User user);
+    UserInfo.ListResponse ofListResponse(User user);
 }

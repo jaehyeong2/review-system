@@ -85,7 +85,7 @@ class UserServiceImplTest {
         userRepository.save(kim);
 
         //when
-        List<UserInfo.DetailResponse> teamUsers = userService.getTeamUsers(entity.getId());
+        List<UserInfo.ListResponse> teamUsers = userService.getTeamUsers(entity.getId());
 
         //then
         assertThat(teamUsers.size()).isEqualTo(2);

@@ -41,12 +41,12 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<UserInfo.DetailResponse> getTeamUsers(Long userId) {
+    public List<UserInfo.ListResponse> getTeamUsers(Long userId) {
         Long teamId = userReader.get(userId).getTeamId();
         if(teamId == null) return Collections.emptyList();
 
         return userReader.getUsersByTeamId(teamId).stream()
-                .map(userMapper::of)
+                .map(userMapper::ofListResponse)
                 .collect(Collectors.toList());
     }
 
