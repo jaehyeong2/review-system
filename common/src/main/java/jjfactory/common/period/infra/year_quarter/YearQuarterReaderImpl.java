@@ -1,7 +1,7 @@
-package jjfactory.common.year_quarter.infra;
+package jjfactory.common.period.infra.year_quarter;
 
-import jjfactory.common.year_quarter.domain.YearQuarter;
-import jjfactory.common.year_quarter.domain.YearQuarterReader;
+import jjfactory.common.period.domain.year_quarter.YearQuarter;
+import jjfactory.common.period.domain.year_quarter.YearQuarterReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

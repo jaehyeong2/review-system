@@ -1,4 +1,4 @@
-package jjfactory.common.year_quarter.domain;
+package jjfactory.common.period.domain.year_quarter;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
