@@ -1,11 +1,7 @@
 package jjfactory.common.period.domain.year_quarter;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,7 +16,9 @@ public class YearQuarter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "year_value")
     private int year;
+    @Column(name = "quarter_value")
     private int quarter;
 
     private boolean isOpen;
