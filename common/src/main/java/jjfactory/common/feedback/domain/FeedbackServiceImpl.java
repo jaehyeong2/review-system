@@ -1,14 +1,14 @@
 package jjfactory.common.feedback.domain;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-@Service
+@Component
 public class FeedbackServiceImpl implements FeedbackService {
     private final FeedbackReader feedbackReader;
     private final FeedbackWriter feedbackWriter;
