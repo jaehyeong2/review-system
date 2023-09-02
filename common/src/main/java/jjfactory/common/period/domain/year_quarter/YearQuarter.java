@@ -4,31 +4,33 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-/**
- * 분기 정보
- */
-@Data
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 @Entity
 public class YearQuarter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    /**
-     * 연도
-     */
     private int year;
-    /**
-     * 분기
-     */
     private int quarter;
 
     private boolean isOpen;
 
-    private LocalDateTime startAt;
-    private LocalDateTime endAt;
+    private LocalDateTime startDt;
+    private LocalDateTime endDt;
+
+    @CreationTimestamp
+    private LocalDateTime createDt;
+    @UpdateTimestamp
+    private LocalDateTime updateDt;
+
 }
