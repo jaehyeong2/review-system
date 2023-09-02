@@ -34,16 +34,15 @@ public class ReviewAnswerSheet {
     @UpdateTimestamp
     private LocalDateTime updateDt;
 
-
     @AllArgsConstructor
-    private enum ReviewType{
+    public enum ReviewType{
         SELF("본인 성과 리뷰"),
         PEER("동료 리뷰"),
         LEADERSHIP("리더 리뷰");
         private String description;
     }
 
-    private enum Status{
+    public enum Status{
         TEMP, COMPLETE
     }
 }
