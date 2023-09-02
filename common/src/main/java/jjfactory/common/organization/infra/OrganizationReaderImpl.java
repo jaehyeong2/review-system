@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrganizationReaderImpl implements OrganizationReader {
     private final OrganizationRepository organizationRepository;
+
     @Override
     public Organization get(Long id) {
         return organizationRepository.findById(id).orElse(null);

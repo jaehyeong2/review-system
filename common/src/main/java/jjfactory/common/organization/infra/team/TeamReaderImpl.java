@@ -2,7 +2,6 @@ package jjfactory.common.organization.infra.team;
 
 import jjfactory.common.organization.domain.team.Team;
 import jjfactory.common.organization.domain.team.TeamReader;
-import jjfactory.common.organization.infra.team.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

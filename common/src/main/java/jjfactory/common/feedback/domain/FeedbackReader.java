@@ -6,7 +6,10 @@ import java.util.List;
 
 public interface FeedbackReader {
     Feedback get(Long id);
+
     FeedbackComment getComment(Long id);
+
     List<Feedback> getFeedbacksByReceiverId(Long receiverId);
+
     List<FeedbackComment> getComments(Long feedbackId);
 }

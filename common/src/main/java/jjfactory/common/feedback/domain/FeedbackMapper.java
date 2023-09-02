@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 public interface FeedbackMapper {
     FeedbackInfo.DetailResponse of(Feedback feedback);
+
     FeedbackInfo.ListResponse ofListResponse(Feedback feedback);
 
 }

@@ -14,6 +14,7 @@ import java.util.List;
 public class FeedbackReaderImpl implements FeedbackReader {
     private final FeedbackRepository feedbackRepository;
     private final FeedbackCommentRepository feedbackCommentRepository;
+
     @Override
     public Feedback get(Long id) {
         return feedbackRepository.findById(id).orElse(null);

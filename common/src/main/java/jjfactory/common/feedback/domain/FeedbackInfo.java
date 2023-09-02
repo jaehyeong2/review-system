@@ -11,7 +11,7 @@ public class FeedbackInfo {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class DetailResponse{
+    public static class DetailResponse {
         private Long id;
         private Long sendUserId;
         private Long receiveUserId;
@@ -23,7 +23,7 @@ public class FeedbackInfo {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class ListResponse{
+    public static class ListResponse {
         private Long id;
         private Long sendUserId;
         private Long receiveUserId;

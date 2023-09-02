@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserInfo.ListResponse> getTeamUsers(Long userId) {
         Long teamId = userReader.get(userId).getTeamId();
-        if(teamId == null) return Collections.emptyList();
+        if (teamId == null) return Collections.emptyList();
 
         return userReader.getUsersByTeamId(teamId).stream()
                 .map(userMapper::ofListResponse)

@@ -8,17 +8,23 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-/** 분기 정보 */
+/**
+ * 분기 정보
+ */
 @Data
 @Entity
-public class YearQuarter{
+public class YearQuarter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /** 연도 */
+    /**
+     * 연도
+     */
     private int year;
-    /** 분기 */
+    /**
+     * 분기
+     */
     private int quarter;
 
     private boolean isOpen;

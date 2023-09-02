@@ -11,14 +11,14 @@ public class UserCommand {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Create{
+    public static class Create {
         private Long teamId;
         private String name;
         private String username;
         private String email;
         private String employeeNumber;
 
-        public User toEntity(){
+        public User toEntity() {
             return User.builder()
                     .name(name)
                     .email(email)
@@ -33,7 +33,7 @@ public class UserCommand {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Update{
+    public static class Update {
         private Long teamId;
         private String username;
         private String email;

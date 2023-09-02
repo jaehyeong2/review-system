@@ -8,7 +8,7 @@ public class UserDto {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class CreateRequest{
+    public static class CreateRequest {
         private Long teamId;
         private String name;
         private String username;

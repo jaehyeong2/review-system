@@ -23,7 +23,7 @@ public class Feedback {
     private Long id;
 
     @OneToMany(mappedBy = "feedback", cascade = CascadeType.REMOVE)
-    private List<FeedbackComment> comments = new ArrayList<>();
+    private final List<FeedbackComment> comments = new ArrayList<>();
 
     private Long sendUserId;
     private Long receiveUserId;
@@ -33,7 +33,7 @@ public class Feedback {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    public enum Type{
+    public enum Type {
 
     }
 
@@ -51,8 +51,8 @@ public class Feedback {
         this.type = type;
     }
 
-    public void update(String content, Type type){
-        if(StringUtils.hasText(content)) this.content = content;
+    public void update(String content, Type type) {
+        if (StringUtils.hasText(content)) this.content = content;
         this.type = type;
     }
 }

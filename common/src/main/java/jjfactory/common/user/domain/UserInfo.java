@@ -13,7 +13,7 @@ public class UserInfo {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class DetailResponse{
+    public static class DetailResponse {
         private Long teamId;
         private String name;
         private String username;
@@ -27,7 +27,7 @@ public class UserInfo {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class ListResponse{
+    public static class ListResponse {
         private Long teamId;
         private String name;
         private String username;

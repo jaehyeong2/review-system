@@ -15,7 +15,7 @@ public class FeedbackCommand {
         private String content;
         private Feedback.Type type;
 
-        public Feedback toEntity(Long sendUserId, Long receiverId){
+        public Feedback toEntity(Long sendUserId, Long receiverId) {
             return Feedback.builder()
                     .content(content)
                     .type(type)
