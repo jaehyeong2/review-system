@@ -1,10 +1,13 @@
 package jjfactory.api.feedback.application;
 
 import jjfactory.common.feedback.domain.FeedbackCommand;
+import jjfactory.common.feedback.domain.FeedbackInfo;
 import jjfactory.common.feedback.domain.FeedbackService;
 import jjfactory.common.notification.domain.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -17,5 +20,17 @@ public class FeedbackFacade {
         notificationService.createFeedbackNotification(receiverUserId, sendUserId);
 
         return feedbackId;
+    }
+
+    public List<FeedbackInfo.ListResponse> getList(Long receiveUserId){
+        return feedbackService.getList(receiveUserId);
+    }
+
+    public Long update(Long feedbackId, FeedbackCommand.Update command){
+        return feedbackService.update(feedbackId, command);
+    }
+
+    public Long delete(Long feedbackId){
+        return feedbackService.delete(feedbackId);
     }
 }
