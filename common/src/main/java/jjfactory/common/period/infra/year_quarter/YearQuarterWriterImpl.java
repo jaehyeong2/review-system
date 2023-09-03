@@ -14,4 +14,9 @@ public class YearQuarterWriterImpl implements YearQuarterWriter {
     public YearQuarter write(YearQuarter yearQuarter) {
         return yearQuarterRepository.save(yearQuarter);
     }
+
+    @Override
+    public void deleteByYear(int year) {
+        yearQuarterRepository.deleteAllByYear(year);
+    }
 }
