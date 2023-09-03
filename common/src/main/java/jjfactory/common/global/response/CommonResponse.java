@@ -1,4 +1,4 @@
-package jjfactory.common.response;
+package jjfactory.common.global.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

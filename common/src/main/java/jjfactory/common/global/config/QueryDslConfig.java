@@ -1,4 +1,4 @@
-package jjfactory.common.config;
+package jjfactory.common.global.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
