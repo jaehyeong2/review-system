@@ -1,5 +1,6 @@
 package jjfactory.admin.period.year_quarter.presentation.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +13,7 @@ public class YearQuarterDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class UpdateRequest{
+    public static class UpdateRequest {
         private Long id;
         private int year;
         private int quarter;
@@ -28,6 +29,7 @@ public class YearQuarterDto {
         private Long id;
         private int year;
         private int quarter;
-        private boolean isOpen;
+        @JsonProperty("isOpen")
+        private boolean open;
     }
 }

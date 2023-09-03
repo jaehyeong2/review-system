@@ -31,6 +31,6 @@ public class YearQuarterInfo {
         private Long id;
         private int year;
         private int quarter;
-        private boolean isOpen;
+        private boolean open;
     }
 }
