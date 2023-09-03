@@ -30,8 +30,8 @@ public class YearQuarterServiceImpl implements YearQuarterService {
 
     @Transactional
     @Override
-    public List<Long> updateYearQuarters(List<YearQuarterCommand.Update> command) {
-        return command.stream().map(e -> {
+    public List<Long> updateYearQuarters(List<YearQuarterCommand.Update> commands) {
+        return commands.stream().map(e -> {
             YearQuarter yearQuarter = yearQuarterReader.get(e.getId());
             yearQuarter.update(e.getYear(), e.getQuarter(), e.getStartDt(), e.getEndDt());
 

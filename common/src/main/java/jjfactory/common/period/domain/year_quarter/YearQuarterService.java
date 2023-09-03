@@ -7,7 +7,7 @@ public interface YearQuarterService {
 
     void deleteByYear(int year);
 
-    List<Long> updateYearQuarters(List<YearQuarterCommand.Update> command);
+    List<Long> updateYearQuarters(List<YearQuarterCommand.Update> commands);
 
     void openYearQuarters(List<Long> ids);
 
