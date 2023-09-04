@@ -34,7 +34,7 @@ public class Feedback {
     private Type type;
 
     public enum Type {
-
+        COMPLIMENT, SUGGEST
     }
 
     @CreationTimestamp
