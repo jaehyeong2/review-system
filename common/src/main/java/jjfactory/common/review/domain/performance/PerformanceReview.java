@@ -1,8 +1,7 @@
-package jjfactory.common.review.domain.peer;
+package jjfactory.common.review.domain.performance;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(indexes = {@Index(columnList = "send_user_id, receive_user_id, meta_id", unique = true)})
-public class PeerReviewer {
+public class PerformanceReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,8 +25,10 @@ public class PeerReviewer {
 
     private boolean isSubmitted;
 
+    private String comment;
+
     @Enumerated(EnumType.STRING)
-    private CreationType type;
+    private Score score;
 
     @CreationTimestamp
     private LocalDateTime createDt;
@@ -38,13 +39,8 @@ public class PeerReviewer {
         isSubmitted = true;
     }
 
-    @AllArgsConstructor
-    public enum CreationType {
-        TEAM("팀원 자동 생성"),
-        BY_EVALUATOR("평가자 신청"),
-        ADMIN("관리자 등록");
-
-        private String description;
+    public enum Score {
+        HIGH, MEDIUM, LOW
     }
 
 }
