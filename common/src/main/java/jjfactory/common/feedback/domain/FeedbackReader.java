@@ -11,5 +11,4 @@ public interface FeedbackReader {
 
     List<Feedback> getFeedbacksByReceiverId(Long receiverId);
 
-    List<FeedbackComment> getComments(Long feedbackId);
 }

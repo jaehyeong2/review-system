@@ -1,5 +1,7 @@
-package jjfactory.common.feedback.domain.like;
+package jjfactory.common.feedback.infra.like;
 
+import jjfactory.common.feedback.domain.like.FeedbackLike;
+import jjfactory.common.feedback.domain.like.FeedbackLikeWriter;
 import jjfactory.common.feedback.infra.like.FeedbackLikeRepository;
 import jjfactory.common.global.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;

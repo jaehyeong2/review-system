@@ -20,11 +20,6 @@ public class FeedbackWriterImpl implements FeedbackWriter {
     }
 
     @Override
-    public FeedbackComment writeComment(FeedbackComment feedbackComment) {
-        return feedbackCommentRepository.save(feedbackComment);
-    }
-
-    @Override
     public Long deleteById(Long feedbackId) {
         Feedback feedback = feedbackRepository.findById(feedbackId).orElseThrow(() -> {
             throw new ResourceNotFoundException("feedback not found");

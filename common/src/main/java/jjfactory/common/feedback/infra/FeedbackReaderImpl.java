@@ -35,8 +35,4 @@ public class FeedbackReaderImpl implements FeedbackReader {
         return feedbackRepository.findAllByReceiveUserId(receiverId);
     }
 
-    @Override
-    public List<FeedbackComment> getComments(Long feedbackId) {
-        return feedbackCommentRepository.findAllByFeedbackId(feedbackId);
-    }
 }
