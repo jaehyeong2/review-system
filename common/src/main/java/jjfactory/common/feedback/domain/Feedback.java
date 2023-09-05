@@ -17,6 +17,9 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
+@Table(
+        indexes = @Index(columnList = "receiveUserId")
+)
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
