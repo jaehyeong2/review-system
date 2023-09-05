@@ -21,4 +21,13 @@ public class CustomExceptionHandler {
                 .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .build();
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ErrorResponse handleResourceNotFoundException(ResourceNotFoundException ex) {
+        return ErrorResponse.builder()
+                .message(ex.getMessage())
+                .code(HttpStatus.NOT_FOUND.value())
+                .build();
+    }
 }

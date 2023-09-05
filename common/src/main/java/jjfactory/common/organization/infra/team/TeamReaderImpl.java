@@ -1,5 +1,6 @@
 package jjfactory.common.organization.infra.team;
 
+import jjfactory.common.global.exception.ResourceNotFoundException;
 import jjfactory.common.organization.domain.team.Team;
 import jjfactory.common.organization.domain.team.TeamReader;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,9 @@ public class TeamReaderImpl implements TeamReader {
 
     @Override
     public Team get(Long id) {
-        return teamRepository.findById(id).orElse(null);
+        return teamRepository.findById(id).orElseThrow(() -> {
+            throw new ResourceNotFoundException("team not found");
+        });
     }
 
     @Override

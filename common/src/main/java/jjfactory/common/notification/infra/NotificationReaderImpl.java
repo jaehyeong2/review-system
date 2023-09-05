@@ -1,5 +1,6 @@
 package jjfactory.common.notification.infra;
 
+import jjfactory.common.global.exception.ResourceNotFoundException;
 import jjfactory.common.notification.domain.Notification;
 import jjfactory.common.notification.domain.NotificationReader;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,9 @@ public class NotificationReaderImpl implements NotificationReader {
 
     @Override
     public Notification get(Long id) {
-        return notificationRepository.findById(id).orElse(null);
+        return notificationRepository.findById(id).orElseThrow(() -> {
+            throw new ResourceNotFoundException("notification not found");
+        });
     }
 
     @Override

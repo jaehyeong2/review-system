@@ -3,6 +3,7 @@ package jjfactory.common.feedback.domain.like;
 import jakarta.persistence.*;
 import jjfactory.common.feedback.domain.Feedback;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,4 +26,10 @@ public class FeedbackLike {
     private LocalDateTime createDt;
     @UpdateTimestamp
     private LocalDateTime updateDt;
+
+    @Builder
+    public FeedbackLike(Feedback feedback, Long userId) {
+        this.feedback = feedback;
+        this.userId = userId;
+    }
 }

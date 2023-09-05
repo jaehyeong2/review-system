@@ -4,6 +4,7 @@ import jjfactory.common.feedback.domain.Feedback;
 import jjfactory.common.feedback.domain.FeedbackReader;
 import jjfactory.common.feedback.domain.comment.FeedbackComment;
 import jjfactory.common.feedback.infra.comment.FeedbackCommentRepository;
+import jjfactory.common.global.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +18,16 @@ public class FeedbackReaderImpl implements FeedbackReader {
 
     @Override
     public Feedback get(Long id) {
-        return feedbackRepository.findById(id).orElse(null);
+        return feedbackRepository.findById(id).orElseThrow(() -> {
+            throw new ResourceNotFoundException("feedback not found");
+        });
     }
 
     @Override
     public FeedbackComment getComment(Long id) {
-        return feedbackCommentRepository.findById(id).orElse(null);
+        return feedbackCommentRepository.findById(id).orElseThrow(() -> {
+            throw new ResourceNotFoundException("comment not found");
+        });
     }
 
     @Override

@@ -1,5 +1,6 @@
 package jjfactory.common.period.infra.year_quarter;
 
+import jjfactory.common.global.exception.ResourceNotFoundException;
 import jjfactory.common.period.domain.year_quarter.YearQuarter;
 import jjfactory.common.period.domain.year_quarter.YearQuarterReader;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,9 @@ public class YearQuarterReaderImpl implements YearQuarterReader {
 
     @Override
     public YearQuarter get(Long id) {
-        return yearQuarterRepository.findById(id).orElse(null);
+        return yearQuarterRepository.findById(id).orElseThrow(() -> {
+            throw new ResourceNotFoundException("yearQuarter not found");
+        });
     }
 
     @Override

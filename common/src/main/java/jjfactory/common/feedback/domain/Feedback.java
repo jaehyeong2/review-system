@@ -27,7 +27,7 @@ public class Feedback {
 
     @OneToMany(mappedBy = "feedback", cascade = CascadeType.REMOVE)
     private final List<FeedbackComment> comments = new ArrayList<>();
-
+    private int feedbackLikeCount;
     private Long sendUserId;
     private Long receiveUserId;
 

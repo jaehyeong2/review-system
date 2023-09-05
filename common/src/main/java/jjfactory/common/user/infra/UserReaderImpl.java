@@ -1,5 +1,6 @@
 package jjfactory.common.user.infra;
 
+import jjfactory.common.global.exception.ResourceNotFoundException;
 import jjfactory.common.user.domain.User;
 import jjfactory.common.user.domain.UserReader;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,9 @@ public class UserReaderImpl implements UserReader {
 
     @Override
     public User get(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(() -> {
+            throw new ResourceNotFoundException("user not found");
+        });
     }
 
     @Override
