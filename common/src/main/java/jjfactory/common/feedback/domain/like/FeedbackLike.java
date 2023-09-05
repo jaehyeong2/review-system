@@ -32,4 +32,11 @@ public class FeedbackLike {
         this.feedback = feedback;
         this.userId = userId;
     }
+
+    public static FeedbackLike create(Feedback feedback, Long userId){
+        return FeedbackLike.builder()
+                .feedback(feedback)
+                .userId(userId)
+                .build();
+    }
 }

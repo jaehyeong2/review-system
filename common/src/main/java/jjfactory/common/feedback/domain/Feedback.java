@@ -2,6 +2,7 @@ package jjfactory.common.feedback.domain;
 
 import jakarta.persistence.*;
 import jjfactory.common.feedback.domain.comment.FeedbackComment;
+import jjfactory.common.feedback.domain.like.FeedbackLike;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +28,10 @@ public class Feedback {
 
     @OneToMany(mappedBy = "feedback", cascade = CascadeType.REMOVE)
     private final List<FeedbackComment> comments = new ArrayList<>();
-    private int feedbackLikeCount;
+
+    @OneToMany(mappedBy = "feedback", cascade = CascadeType.REMOVE)
+    private final List<FeedbackLike> likes = new ArrayList<>();
+    private int likeCount;
     private Long sendUserId;
     private Long receiveUserId;
 
@@ -57,5 +61,9 @@ public class Feedback {
     public void update(String content, Type type) {
         if (StringUtils.hasText(content)) this.content = content;
         this.type = type;
+    }
+
+    public void increaseLikeCount(){
+        likeCount++;
     }
 }

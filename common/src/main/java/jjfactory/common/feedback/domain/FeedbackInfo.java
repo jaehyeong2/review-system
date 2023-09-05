@@ -17,6 +17,7 @@ public class FeedbackInfo {
         private Long receiveUserId;
         private String content;
         private Feedback.Type type;
+        private int likeCount;
     }
 
     @Data
@@ -29,5 +30,6 @@ public class FeedbackInfo {
         private Long receiveUserId;
         private String content;
         private Feedback.Type type;
+        private int likeCount;
     }
 }

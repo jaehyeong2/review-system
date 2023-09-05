@@ -1,5 +1,7 @@
 package jjfactory.common.feedback.domain;
 
+import jjfactory.common.feedback.domain.like.FeedbackLike;
+import jjfactory.common.feedback.domain.like.FeedbackLikeWriter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,7 @@ import java.util.stream.Collectors;
 public class FeedbackServiceImpl implements FeedbackService {
     private final FeedbackReader feedbackReader;
     private final FeedbackWriter feedbackWriter;
+    private final FeedbackLikeWriter feedbackLikeWriter;
     private final FeedbackMapper feedbackMapper;
 
     @Transactional
@@ -52,5 +55,16 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedback.update(command.getContent(), command.getType());
 
         return feedback.getId();
+    }
+
+    @Transactional
+    @Override
+    public void like(Long feedbackId, Long userId){
+        Feedback feedback = feedbackReader.get(feedbackId);
+
+        FeedbackLike feedbackLike = FeedbackLike.create(feedback, userId);
+        feedbackLikeWriter.write(feedbackLike);
+
+        feedback.increaseLikeCount();
     }
 }

@@ -12,4 +12,6 @@ public interface FeedbackService {
     List<FeedbackInfo.ListResponse> getList(Long loginUserId);
 
     Long update(Long feedbackId, FeedbackCommand.Update command);
+
+    void like(Long feedbackId, Long userId);
 }
