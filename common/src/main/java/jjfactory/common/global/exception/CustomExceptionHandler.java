@@ -30,4 +30,13 @@ public class CustomExceptionHandler {
                 .code(HttpStatus.NOT_FOUND.value())
                 .build();
     }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(AccessForbiddenException.class)
+    public ErrorResponse handleAccessForbiddenException(AccessForbiddenException ex) {
+        return ErrorResponse.builder()
+                .message("do not have permission to access the resource")
+                .code(HttpStatus.FORBIDDEN.value())
+                .build();
+    }
 }
