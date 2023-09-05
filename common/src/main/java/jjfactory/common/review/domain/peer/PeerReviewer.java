@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(indexes = {@Index(columnList = "send_user_id, receive_user_id, meta_id", unique = true)})
+@Table(indexes = {@Index(columnList = "sendUserId, receiveUserId, metaId", unique = true)})
 public class PeerReviewer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
