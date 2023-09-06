@@ -52,4 +52,13 @@ public class FeedbackController {
         return CommonResponse.ok();
     }
 
+    @PostMapping("/{feedbackId}/like")
+    public CommonResponse likeFeedback(@PathVariable Long feedbackId){
+        //todo
+        Long loginUserId = 21L;
+        feedbackFacade.likeFeedback(feedbackId, loginUserId);
+
+        return CommonResponse.ok();
+    }
+
 }

@@ -15,22 +15,26 @@ public class FeedbackFacade {
     private final FeedbackService feedbackService;
     private final NotificationService notificationService;
 
-    public Long createFeedback(FeedbackCommand.Create command, Long receiverUserId, Long sendUserId){
+    public Long createFeedback(FeedbackCommand.Create command, Long receiverUserId, Long sendUserId) {
         Long feedbackId = feedbackService.create(command, sendUserId, receiverUserId);
         notificationService.createFeedbackNotification(receiverUserId, sendUserId);
 
         return feedbackId;
     }
 
-    public List<FeedbackInfo.ListResponse> getList(Long receiveUserId){
+    public List<FeedbackInfo.ListResponse> getList(Long receiveUserId) {
         return feedbackService.getList(receiveUserId);
     }
 
-    public Long update(Long feedbackId, FeedbackCommand.Update command){
+    public Long update(Long feedbackId, FeedbackCommand.Update command) {
         return feedbackService.update(feedbackId, command);
     }
 
-    public Long delete(Long feedbackId){
+    public Long delete(Long feedbackId) {
         return feedbackService.delete(feedbackId);
+    }
+
+    public void likeFeedback(Long feedbackId, Long userId) {
+        feedbackService.like(feedbackId, userId);
     }
 }
