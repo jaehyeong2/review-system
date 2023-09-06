@@ -24,7 +24,7 @@ public class FeedbackCommentServiceImpl implements FeedbackCommentService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<FeedbackCommentInfo.ListResponse> getComments(Long feedbackId) {
+    public List<FeedbackCommentInfo.ListResponse> getList(Long feedbackId) {
         return feedbackCommentReader.getComments(feedbackId).stream()
                 .map(feedbackMapper::ofListResponse)
                 .collect(Collectors.toList());

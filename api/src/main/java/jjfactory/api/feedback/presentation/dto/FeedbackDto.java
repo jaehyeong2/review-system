@@ -14,6 +14,16 @@ public class FeedbackDto {
     @NoArgsConstructor
     public static class CreateRequest {
         private String content;
+        private Long receiverUserId;
+        private Feedback.Type type;
+    }
+
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class UpdateRequest {
+        private String content;
         private Feedback.Type type;
     }
 
@@ -27,5 +37,6 @@ public class FeedbackDto {
         private Long receiveUserId;
         private String content;
         private Feedback.Type type;
+        private int likeCount;
     }
 }

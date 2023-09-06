@@ -8,4 +8,6 @@ import org.mapstruct.Mapper;
 public interface FeedbackDtoMapper {
     FeedbackCommand.Create of(FeedbackDto.CreateRequest request);
     FeedbackDto.ListResponse of(FeedbackInfo.ListResponse response);
+
+    FeedbackCommand.Update of(FeedbackDto.UpdateRequest request);
 }
