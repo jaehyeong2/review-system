@@ -19,13 +19,13 @@ public class FeedbackController {
     private final FeedbackFacade feedbackFacade;
     private final FeedbackDtoMapper feedbackDtoMapper;
 
-    @PostMapping("/{receiverUserId}")
-    public CommonResponse createFeedback(@RequestBody FeedbackDto.CreateRequest request, @PathVariable Long receiverUserId){
+    @PostMapping
+    public CommonResponse createFeedback(@RequestBody FeedbackDto.CreateRequest request){
         //todo
         Long loginUserId = 21L;
 
         FeedbackCommand.Create command = feedbackDtoMapper.of(request);
-        return new CommonResponse(feedbackFacade.createFeedback(command, receiverUserId, loginUserId));
+        return new CommonResponse(feedbackFacade.createFeedback(command, request.getReceiverUserId(), loginUserId));
     }
 
     @GetMapping
@@ -41,7 +41,9 @@ public class FeedbackController {
     }
 
     @PutMapping("/{feedbackId}")
-    public CommonResponse update(@PathVariable Long feedbackId, @RequestBody FeedbackCommand.Update command){
+    public CommonResponse update(@PathVariable Long feedbackId, @RequestBody FeedbackDto.UpdateRequest request){
+        FeedbackCommand.Update command = feedbackDtoMapper.of(request);
+
         feedbackFacade.update(feedbackId, command);
         return CommonResponse.ok();
     }
