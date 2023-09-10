@@ -36,7 +36,7 @@ public class TotalReviewMeta {
     @Comment("리뷰 결과 공개일")
     private LocalDate showResultDate;
 
-    private Long yearQuarterId;
+    private long yearQuarterId;
 
     @CreationTimestamp
     private LocalDateTime createDt;
