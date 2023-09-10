@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class ReviewMeta {
+public class TotalReviewMeta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

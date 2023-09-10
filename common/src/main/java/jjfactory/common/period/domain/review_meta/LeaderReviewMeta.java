@@ -15,7 +15,7 @@ public class LeaderReviewMeta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    private ReviewMeta reviewMeta;
+    private TotalReviewMeta totalReviewMeta;
     private LocalDate startDate;
     private LocalDate endDate;
 }
