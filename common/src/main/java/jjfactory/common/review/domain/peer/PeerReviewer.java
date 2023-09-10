@@ -1,10 +1,7 @@
 package jjfactory.common.review.domain.peer;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,16 +10,14 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(indexes = {@Index(columnList = "sendUserId, receiveUserId, metaId", unique = true)})
+@Table(indexes = {@Index(columnList = "userId, evaluatorId, metaId", unique = true)})
 public class PeerReviewer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Long metaId;
-
-    private Long receiveUserId;
-    private Long sendUserId;
+    private Long userId;
+    private Long evaluatorId;
 
     private boolean isSubmitted;
 
@@ -47,4 +42,21 @@ public class PeerReviewer {
         private String description;
     }
 
+    @Builder
+    public PeerReviewer(Long metaId, Long userId, Long evaluatorId, boolean isSubmitted, CreationType type) {
+        this.metaId = metaId;
+        this.userId = userId;
+        this.evaluatorId = evaluatorId;
+        this.isSubmitted = isSubmitted;
+        this.type = type;
+    }
+
+    public static PeerReviewer createTeamMember(Long evaluatorId, Long userId, Long metaId){
+        return PeerReviewer.builder()
+                .evaluatorId(evaluatorId)
+                .userId(userId)
+                .type(CreationType.TEAM)
+                .metaId(metaId)
+                .build();
+    }
 }
