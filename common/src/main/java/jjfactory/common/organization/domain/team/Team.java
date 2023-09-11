@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @Table(
-        indexes = @Index(columnList = "yearQuarterId")
+        indexes = @Index(columnList = "code, yearQuarterId", unique = true)
 )
 public class Team {
     @Id
