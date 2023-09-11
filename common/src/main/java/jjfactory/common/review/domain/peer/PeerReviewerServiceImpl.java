@@ -33,15 +33,15 @@ public class PeerReviewerServiceImpl implements PeerReviewerService {
         UserTeamHistory userTeamHistory = userTeamHistoryReader
                 .findOneByUserIdAndYearQuarterId(receiveUserId, yearQuarterId);
 
-        List<Long> teamMemberIds = userTeamHistoryReader.findAllByTeamId(userTeamHistory.getTeamId())
+        List<Long> teamMemberIds = userTeamHistoryReader.findAllByTeamIdExceptUser(userTeamHistory.getTeamId(), receiveUserId)
                 .stream().map(uth -> uth.getUser().getId())
                 .toList();
 
-        Set<Long> perrReviewerIdSet = peerReviewerReader.getByUserIdAndMetaId(receiveUserId, metaId)
+        Set<Long> peerReviewerIdSet = peerReviewerReader.getByUserIdAndMetaId(receiveUserId, metaId)
                 .stream().map(PeerReviewer::getId).collect(Collectors.toSet());
 
         teamMemberIds.forEach(memberId -> {
-            if (!perrReviewerIdSet.contains(memberId)) {
+            if (!peerReviewerIdSet.contains(memberId)) {
                 PeerReviewer peerReviewer = PeerReviewer.createTeamMember(memberId, receiveUserId, metaId);
                 peerReviewerWriter.write(peerReviewer);
             }

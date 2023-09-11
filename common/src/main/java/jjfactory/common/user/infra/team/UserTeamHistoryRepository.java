@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface UserTeamHistoryRepository extends JpaRepository<UserTeamHistory, Long> {
     List<UserTeamHistory> findAllByTeamId(Long teamId);
+    List<UserTeamHistory> findAllByTeamIdAndUserIdNot(Long teamId, Long userId);
 }

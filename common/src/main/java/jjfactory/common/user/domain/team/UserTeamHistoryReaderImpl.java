@@ -22,4 +22,9 @@ public class UserTeamHistoryReaderImpl implements UserTeamHistoryReader {
     public List<UserTeamHistory> findAllByTeamId(Long teamId) {
         return userTeamHistoryRepository.findAllByTeamId(teamId);
     }
+
+    @Override
+    public List<UserTeamHistory> findAllByTeamIdExceptUser(Long teamId, Long userId) {
+        return userTeamHistoryRepository.findAllByTeamIdAndUserIdNot(teamId, userId);
+    }
 }
