@@ -1,5 +1,6 @@
-package jjfactory.api.review.presentation;
+package jjfactory.api.review.presentation.peer;
 
+import jjfactory.api.review.presentation.peer.dto.PeerReviewDtoMapper;
 import jjfactory.api.review.qpplication.peer.PeerReviewFacade;
 import jjfactory.common.global.response.CommonResponse;
 import jjfactory.common.review.domain.peer.PeerReviewerInfo;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 public class PeerReviewController {
     private final PeerReviewFacade peerReviewFacade;
+    private final PeerReviewDtoMapper peerReviewDtoMapper;
 
     @PostMapping("/reviewr")
     public CommonResponse addTeamMembersToPeerReviewer(@RequestParam Long metaId) {
@@ -24,11 +26,13 @@ public class PeerReviewController {
     }
 
     @GetMapping("/reviewr")
-    public List<PeerReviewerInfo.ListResponse> findListByReceiveUserIdAndMetaId(@RequestParam Long metaId) {
+    public CommonResponse<List<PeerReviewerInfo.ListResponse>> findListByReceiveUserIdAndMetaId(@RequestParam Long metaId) {
         //todo
         Long loginUserId = 23L;
 
-        return peerReviewFacade.findListByReceiveUserIdAndMetaId(loginUserId, metaId);
+        return new CommonResponse(peerReviewFacade.findListByReceiveUserIdAndMetaId(loginUserId, metaId)
+                .stream().map(peerReviewDtoMapper::of)
+                .toList());
     }
 
     @DeleteMapping("/reviewr/{id}")
