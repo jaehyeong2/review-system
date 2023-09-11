@@ -1,4 +1,4 @@
-package jjfactory.api.review.qpplication.peer;
+package jjfactory.api.review.application.peer;
 
 import jjfactory.common.review.domain.peer.PeerReviewerInfo;
 import jjfactory.common.review.domain.peer.PeerReviewerService;

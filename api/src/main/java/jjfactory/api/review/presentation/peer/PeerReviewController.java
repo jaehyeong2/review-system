@@ -1,7 +1,7 @@
 package jjfactory.api.review.presentation.peer;
 
 import jjfactory.api.review.presentation.peer.dto.PeerReviewDtoMapper;
-import jjfactory.api.review.qpplication.peer.PeerReviewFacade;
+import jjfactory.api.review.application.peer.PeerReviewFacade;
 import jjfactory.common.global.response.CommonResponse;
 import jjfactory.common.review.domain.peer.PeerReviewerInfo;
 import lombok.RequiredArgsConstructor;

@@ -3,7 +3,7 @@ package jjfactory.api.review.presentation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jjfactory.api.review.presentation.peer.PeerReviewController;
 import jjfactory.api.review.presentation.peer.dto.PeerReviewDtoMapperImpl;
-import jjfactory.api.review.qpplication.peer.PeerReviewFacade;
+import jjfactory.api.review.application.peer.PeerReviewFacade;
 import jjfactory.common.review.domain.peer.PeerReviewer;
 import jjfactory.common.review.domain.peer.PeerReviewerInfo;
 import org.junit.jupiter.api.DisplayName;
