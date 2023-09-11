@@ -2,6 +2,8 @@ package jjfactory.common.review.domain.peer;
 
 import jjfactory.common.period.domain.review_meta.PeerReviewMeta;
 import jjfactory.common.period.domain.review_meta.ReviewMetaReader;
+import jjfactory.common.review.domain.ReviewAnswerSheet;
+import jjfactory.common.review.domain.ReviewAnswerWriter;
 import jjfactory.common.user.domain.team.UserTeamHistory;
 import jjfactory.common.user.domain.team.UserTeamHistoryReader;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ public class PeerReviewerServiceImpl implements PeerReviewerService {
     private final PeerReviewerMapper peerReviewerMapper;
     private final UserTeamHistoryReader userTeamHistoryReader;
     private final ReviewMetaReader reviewMetaReader;
+    private final ReviewAnswerWriter reviewAnswerWriter;
 
     @Transactional
     @Override
@@ -31,15 +34,15 @@ public class PeerReviewerServiceImpl implements PeerReviewerService {
                 .findOneByUserIdAndYearQuarterId(receiveUserId, yearQuarterId);
 
         List<Long> teamMemberIds = userTeamHistoryReader.findAllByTeamId(userTeamHistory.getTeamId())
-                .stream().map(hth -> userTeamHistory.getUser().getId())
+                .stream().map(uth -> uth.getUser().getId())
                 .toList();
 
         Set<Long> perrReviewerIdSet = peerReviewerReader.getByUserIdAndMetaId(receiveUserId, metaId)
                 .stream().map(PeerReviewer::getId).collect(Collectors.toSet());
 
-        teamMemberIds.forEach(e -> {
-            if (!perrReviewerIdSet.contains(e)) {
-                PeerReviewer peerReviewer = PeerReviewer.createTeamMember(e, receiveUserId, metaId);
+        teamMemberIds.forEach(memberId -> {
+            if (!perrReviewerIdSet.contains(memberId)) {
+                PeerReviewer peerReviewer = PeerReviewer.createTeamMember(memberId, receiveUserId, metaId);
                 peerReviewerWriter.write(peerReviewer);
             }
         });
@@ -56,8 +59,20 @@ public class PeerReviewerServiceImpl implements PeerReviewerService {
 
     @Transactional
     @Override
-    public void delete(Long id) {
-        PeerReviewer peerReviewer = peerReviewerReader.getOrThrow(id);
+    public void delete(Long peerReviewerId) {
+        PeerReviewer peerReviewer = peerReviewerReader.getOrThrow(peerReviewerId);
         peerReviewerWriter.deleteById(peerReviewer.getId());
+    }
+
+    @Transactional
+    @Override
+    public void confirmPeerReviewer(Long userId, Set<Long> peerReviewerIds, Long metaId){
+        peerReviewerIds.forEach(id -> {
+            PeerReviewer peerReviewer = peerReviewerReader.getOrThrow(id);
+            peerReviewer.submit();
+
+            ReviewAnswerSheet reviewAnswerSheet = ReviewAnswerSheet.ofPeer(userId, peerReviewer.getEvaluatorId(), metaId);
+            reviewAnswerWriter.writeAnswerSheet(reviewAnswerSheet);
+        });
     }
 }
