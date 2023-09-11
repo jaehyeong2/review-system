@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
@@ -42,4 +43,16 @@ public class TotalReviewMeta {
     private LocalDateTime createDt;
     @UpdateTimestamp
     private LocalDateTime updateDt;
+
+    @Builder
+    public TotalReviewMeta(String name, boolean reviewPeerIncluded, boolean reviewLeaderIncluded, boolean reviewSelfIncluded, LocalDate showMenuDate, LocalDate hideMenuDate, LocalDate showResultDate, long yearQuarterId) {
+        this.name = name;
+        this.reviewPeerIncluded = reviewPeerIncluded;
+        this.reviewLeaderIncluded = reviewLeaderIncluded;
+        this.reviewSelfIncluded = reviewSelfIncluded;
+        this.showMenuDate = showMenuDate;
+        this.hideMenuDate = hideMenuDate;
+        this.showResultDate = showResultDate;
+        this.yearQuarterId = yearQuarterId;
+    }
 }

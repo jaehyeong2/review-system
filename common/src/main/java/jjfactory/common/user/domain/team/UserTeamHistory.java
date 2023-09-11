@@ -3,6 +3,7 @@ package jjfactory.common.user.domain.team;
 import jakarta.persistence.*;
 import jjfactory.common.user.domain.User;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,11 @@ public class UserTeamHistory {
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+    private long teamId;
 
-    private Long teamId;
+    @Builder
+    public UserTeamHistory(User user, long teamId) {
+        this.user = user;
+        this.teamId = teamId;
+    }
 }

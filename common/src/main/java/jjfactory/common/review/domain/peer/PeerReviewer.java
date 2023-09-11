@@ -20,6 +20,7 @@ public class PeerReviewer {
     private Long evaluatorId;
 
     private boolean isSubmitted;
+    private LocalDateTime submitDt;
 
     @Enumerated(EnumType.STRING)
     private CreationType type;
@@ -31,6 +32,7 @@ public class PeerReviewer {
 
     public void submit() {
         isSubmitted = true;
+        submitDt = LocalDateTime.now();
     }
 
     @AllArgsConstructor

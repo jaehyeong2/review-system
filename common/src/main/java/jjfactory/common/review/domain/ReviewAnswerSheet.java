@@ -1,10 +1,7 @@
 package jjfactory.common.review.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -18,16 +15,24 @@ public class ReviewAnswerSheet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Long metaId;
-    @Comment("작성자")
-    private Long userId;
     @Comment("평가대상. 셀프리뷰일 경우 작성자와 동일")
-    private Long receiveUserId;
+    private Long userId;
+    @Comment("평가자")
+    private Long evaluatorId;
     @Enumerated(EnumType.STRING)
     private ReviewType reviewType;
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status = Status.NOT_STARTED;
+
+    @Builder
+    public ReviewAnswerSheet(Long metaId, Long userId, Long evaluatorId, ReviewType reviewType, Status status) {
+        this.metaId = metaId;
+        this.userId = userId;
+        this.evaluatorId = evaluatorId;
+        this.reviewType = reviewType;
+        this.status = status;
+    }
 
     @CreationTimestamp
     private LocalDateTime createDt;
@@ -38,11 +43,48 @@ public class ReviewAnswerSheet {
     public enum ReviewType{
         SELF("본인 성과 리뷰"),
         PEER("동료 리뷰"),
-        LEADERSHIP("리더 리뷰");
+        LEADERSHIP("리더 리뷰"),
+        PERFORMANCE("성과 리뷰");
         private String description;
     }
 
     public enum Status{
-        TEMP, COMPLETE
+        NOT_STARTED, TEMP, COMPLETE
+    }
+
+    public static ReviewAnswerSheet ofPeer(Long userId, Long evaluatorId, Long metaId){
+        return ReviewAnswerSheet.builder()
+                .userId(userId)
+                .evaluatorId(evaluatorId)
+                .reviewType(ReviewType.PEER)
+                .metaId(metaId)
+                .build();
+    }
+
+    public static ReviewAnswerSheet ofLeader(Long userId, Long evaluatorId, Long metaId){
+        return ReviewAnswerSheet.builder()
+                .userId(userId)
+                .evaluatorId(evaluatorId)
+                .reviewType(ReviewType.LEADERSHIP)
+                .metaId(metaId)
+                .build();
+    }
+
+    public static ReviewAnswerSheet ofPerformance(Long userId, Long evaluatorId, Long metaId){
+        return ReviewAnswerSheet.builder()
+                .userId(userId)
+                .evaluatorId(evaluatorId)
+                .reviewType(ReviewType.PERFORMANCE)
+                .metaId(metaId)
+                .build();
+    }
+
+    public static ReviewAnswerSheet ofSelf(Long userId, Long evaluatorId, Long metaId){
+        return ReviewAnswerSheet.builder()
+                .userId(userId)
+                .evaluatorId(evaluatorId)
+                .reviewType(ReviewType.SELF)
+                .metaId(metaId)
+                .build();
     }
 }

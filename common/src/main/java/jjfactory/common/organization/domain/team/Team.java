@@ -3,6 +3,7 @@ package jjfactory.common.organization.domain.team;
 import jakarta.persistence.*;
 import jjfactory.common.organization.domain.Organization;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,4 +32,11 @@ public class Team {
     @UpdateTimestamp
     private LocalDateTime updateDt;
 
+    @Builder
+    public Team(Long yearQuarterId, String name, String code, Organization organization) {
+        this.yearQuarterId = yearQuarterId;
+        this.name = name;
+        this.code = code;
+        this.organization = organization;
+    }
 }
