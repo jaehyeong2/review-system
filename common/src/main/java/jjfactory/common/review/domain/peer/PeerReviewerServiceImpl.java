@@ -2,8 +2,8 @@ package jjfactory.common.review.domain.peer;
 
 import jjfactory.common.period.domain.review_meta.PeerReviewMeta;
 import jjfactory.common.period.domain.review_meta.ReviewMetaReader;
-import jjfactory.common.review.domain.ReviewAnswerSheet;
-import jjfactory.common.review.domain.ReviewAnswerWriter;
+import jjfactory.common.review.domain.answer.ReviewAnswerSheet;
+import jjfactory.common.review.domain.answer.ReviewAnswerWriter;
 import jjfactory.common.user.domain.team.UserTeamHistory;
 import jjfactory.common.user.domain.team.UserTeamHistoryReader;
 import lombok.RequiredArgsConstructor;

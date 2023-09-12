@@ -1,6 +1,7 @@
-package jjfactory.common.review.domain;
+package jjfactory.common.review.domain.answer;
 
 import jakarta.persistence.*;
+import jjfactory.common.review.domain.ReviewType;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,15 +39,6 @@ public class ReviewAnswerSheet {
     private LocalDateTime createDt;
     @UpdateTimestamp
     private LocalDateTime updateDt;
-
-    @AllArgsConstructor
-    public enum ReviewType{
-        SELF("본인 성과 리뷰"),
-        PEER("동료 리뷰"),
-        LEADERSHIP("리더 리뷰"),
-        PERFORMANCE("성과 리뷰");
-        private String description;
-    }
 
     public enum Status{
         NOT_STARTED, TEMP, COMPLETE

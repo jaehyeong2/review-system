@@ -1,7 +1,7 @@
-package jjfactory.common.review.infra;
+package jjfactory.common.review.infra.answer;
 
-import jjfactory.common.review.domain.ReviewAnswerSheet;
-import jjfactory.common.review.domain.ReviewAnswerWriter;
+import jjfactory.common.review.domain.answer.ReviewAnswerSheet;
+import jjfactory.common.review.domain.answer.ReviewAnswerWriter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
