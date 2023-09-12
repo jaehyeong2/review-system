@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(indexes = {@Index(columnList = "sendUserId, receiveUserId, metaId", unique = true)})
+@Table(indexes = {@Index(columnList = "evaluatorId, userId, metaId", unique = true)})
 public class PerformanceReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +20,8 @@ public class PerformanceReview {
 
     private Long metaId;
 
-    private Long receiveUserId;
-    private Long sendUserId;
+    private Long evaluatorId;
+    private Long userId;
 
     private boolean isSubmitted;
 

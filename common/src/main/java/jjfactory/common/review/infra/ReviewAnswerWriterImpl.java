@@ -1,6 +1,7 @@
-package jjfactory.common.review.domain;
+package jjfactory.common.review.infra;
 
-import jjfactory.common.review.infra.ReviewAnswerSheetRepository;
+import jjfactory.common.review.domain.ReviewAnswerSheet;
+import jjfactory.common.review.domain.ReviewAnswerWriter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReviewAnswerWriterImpl implements ReviewAnswerWriter {
     private final ReviewAnswerSheetRepository reviewAnswerSheetRepository;
+
     @Override
     public ReviewAnswerSheet writeAnswerSheet(ReviewAnswerSheet reviewAnswerSheet) {
         return reviewAnswerSheetRepository.save(reviewAnswerSheet);
