@@ -20,6 +20,7 @@ public class Question {
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
     private int seq;
+    private String content;
     @Enumerated(EnumType.STRING)
     private Type type;
     @CreationTimestamp

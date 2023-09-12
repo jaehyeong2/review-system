@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,6 +21,8 @@ public class Category {
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     private Questionnaire questionnaire;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
+    private List<Question> questions = new ArrayList<>();
     private String title;
     private String description;
     private int seq;
