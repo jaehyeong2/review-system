@@ -8,6 +8,8 @@ import jjfactory.common.review.domain.question.Questionnaire;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Component
 public class QuestionnaireReaderImpl implements QuestionnaireReader {
@@ -20,6 +22,11 @@ public class QuestionnaireReaderImpl implements QuestionnaireReader {
         return questionnaireRepository.findById(id).orElseThrow(() -> {
             throw new ResourceNotFoundException("questionnaire not found");
         });
+    }
+
+    @Override
+    public List<Questionnaire> getQuestionnairesByMetaId(Long metaId) {
+        return questionnaireRepository.findAllByMetaId(metaId);
     }
 
     @Override

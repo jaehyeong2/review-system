@@ -12,6 +12,7 @@ import java.util.List;
 public class QuestionnaireServiceImpl implements QuestionnaireService {
     private final QuestionnaireFactory questionnaireFactory;
     private final QuestionnaireReader questionnaireReader;
+    private final QuestionnaireMapper questionnaireMapper;
     @Override
     public Long createQuestionnaire(QuestionnaireCommand.Create command) {
         return null;
@@ -42,12 +43,13 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     @Transactional(readOnly = true)
     @Override
     public List<QuestionnaireInfo.ListResponse> getQuestionnaires(Long metaId) {
-        return null;
+        return questionnaireReader.getQuestionnairesByMetaId(metaId)
+                .stream().map(questionnaireMapper::ofListResponse).toList();
     }
 
     @Transactional(readOnly = true)
     @Override
     public QuestionnaireInfo.DetailResponse getQuestionnaire(Long id) {
-        return null;
+        return questionnaireMapper.of(questionnaireReader.getQuestionnaire(id));
     }
 }
