@@ -39,4 +39,13 @@ public class CustomExceptionHandler {
                 .code(HttpStatus.FORBIDDEN.value())
                 .build();
     }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(ConflictException.class)
+    public ErrorResponse handleConflictException(ResourceNotFoundException ex) {
+        return ErrorResponse.builder()
+                .message(ex.getMessage())
+                .code(HttpStatus.NOT_FOUND.value())
+                .build();
+    }
 }
