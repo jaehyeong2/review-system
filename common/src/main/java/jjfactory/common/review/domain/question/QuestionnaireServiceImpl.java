@@ -15,7 +15,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     private final QuestionnaireMapper questionnaireMapper;
     @Override
     public Long createQuestionnaire(QuestionnaireCommand.Create command) {
-        return null;
+        return questionnaireFactory.writeQuestionnaire(command).getId();
     }
 
     @Override
@@ -25,8 +25,8 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     }
 
     @Override
-    public void update(Long id, QuestionnaireCommand.Update command) {
-
+    public Long update(Long id, QuestionnaireCommand.Update command) {
+        return questionnaireFactory.update(id, command);
     }
 
     @Override

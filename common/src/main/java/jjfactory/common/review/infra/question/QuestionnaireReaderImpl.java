@@ -30,16 +30,26 @@ public class QuestionnaireReaderImpl implements QuestionnaireReader {
     }
 
     @Override
-    public Category getCategory(Long id) {
+    public Category getCategoryOrThrow(Long id) {
         return categoryRepository.findById(id).orElseThrow(() -> {
             throw new ResourceNotFoundException("category not found");
         });
     }
 
     @Override
-    public Question getQuestion(Long id) {
+    public Category getCategoryOrNull(Long id) {
+        return categoryRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Question getQuestionOrThrow(Long id) {
         return questionRepository.findById(id).orElseThrow(() -> {
             throw new ResourceNotFoundException("question not found");
         });
+    }
+
+    @Override
+    public Question getQuestionOrNull(Long id) {
+        return questionRepository.findById(id).orElse(null);
     }
 }

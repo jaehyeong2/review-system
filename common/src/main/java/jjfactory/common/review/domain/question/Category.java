@@ -3,6 +3,7 @@ package jjfactory.common.review.domain.question;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -30,4 +31,18 @@ public class Category {
     private LocalDateTime createDt;
     @UpdateTimestamp
     private LocalDateTime updateDt;
+
+    @Builder
+    public Category(Questionnaire questionnaire, String title, String description, int seq) {
+        this.questionnaire = questionnaire;
+        this.title = title;
+        this.description = description;
+        this.seq = seq;
+    }
+
+    public void update(String title, String description, int seq) {
+        this.title = title;
+        this.description = description;
+        this.seq = seq;
+    }
 }

@@ -4,15 +4,19 @@ package jjfactory.common.review.domain.question;
 import jakarta.persistence.*;
 import jjfactory.common.review.domain.ReviewType;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@DynamicUpdate
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -34,10 +38,24 @@ public class Questionnaire {
     @UpdateTimestamp
     private LocalDateTime updateDt;
 
+    @Builder
+    public Questionnaire(long metaId, String title, String description, ReviewType reviewType, Status status) {
+        this.metaId = metaId;
+        this.title = title;
+        this.description = description;
+        this.reviewType = reviewType;
+        this.status = status;
+    }
+
     public enum Status {
         OPEN, TEMP
     }
     public void open(){
         status = Status.OPEN;
+    }
+
+    public void updateQuestionnaire(String title, String description) {
+        if(StringUtils.hasText(title)) this.title = title;
+        if(StringUtils.hasText(description)) this.description = description;
     }
 }

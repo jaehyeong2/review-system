@@ -3,6 +3,7 @@ package jjfactory.common.review.domain.question;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,4 +32,19 @@ public class Question {
     public enum Type {
         SUBJECTIVE, OBJECTIVE
     }
+
+    @Builder
+    public Question(Category category, int seq, String content, Type type) {
+        this.category = category;
+        this.seq = seq;
+        this.content = content;
+        this.type = type;
+    }
+
+    public void update(String content, Type type, int seq) {
+        this.content = content;
+        this.type = type;
+        this.seq = seq;
+    }
 }
+

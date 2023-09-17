@@ -18,6 +18,14 @@ public class QuestionnaireCommand {
         private String description;
         private long metaId;
         private Set<CreateCategory> categories = new HashSet();
+
+        public Questionnaire toEntity(){
+            return Questionnaire.builder()
+                    .title(title)
+                    .description(description)
+                    .metaId(metaId)
+                    .build();
+        }
     }
 
     @Builder
@@ -25,7 +33,6 @@ public class QuestionnaireCommand {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Update {
-        private Long id;
         private String title;
         private String description;
         private Set<UpdateCategory> categories = new HashSet();
@@ -40,6 +47,15 @@ public class QuestionnaireCommand {
         private String description;
         private int seq;
         private Set<CreateQuestion> questions = new HashSet();
+
+        public Category toEntity(Questionnaire questionnaire){
+            return Category.builder()
+                    .title(title)
+                    .questionnaire(questionnaire)
+                    .description(description)
+                    .seq(seq)
+                    .build();
+        }
     }
 
     @Builder
@@ -52,6 +68,15 @@ public class QuestionnaireCommand {
         private String description;
         private int seq;
         private Set<UpdateQuestion> questions = new HashSet();
+
+        public Category toEntity(Questionnaire questionnaire){
+            return Category.builder()
+                    .title(title)
+                    .questionnaire(questionnaire)
+                    .description(description)
+                    .seq(seq)
+                    .build();
+        }
     }
 
     @Builder
@@ -61,6 +86,16 @@ public class QuestionnaireCommand {
     public static class CreateQuestion {
         private String content;
         private int seq;
+        private Question.Type type;
+
+        public Question toEntity(Category category){
+            return Question.builder()
+                    .category(category)
+                    .seq(seq)
+                    .type(type)
+                    .content(content)
+                    .build();
+        }
     }
 
     @Builder
@@ -71,5 +106,15 @@ public class QuestionnaireCommand {
         private Long id;
         private String content;
         private int seq;
+        private Question.Type type;
+
+        public Question toEntity(Category category){
+            return Question.builder()
+                    .category(category)
+                    .seq(seq)
+                    .type(type)
+                    .content(content)
+                    .build();
+        }
     }
 }
