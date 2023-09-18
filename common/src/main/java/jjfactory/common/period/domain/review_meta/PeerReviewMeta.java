@@ -15,7 +15,7 @@ public class PeerReviewMeta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private TotalReviewMeta totalReviewMeta;
     private LocalDate startDate;
     private LocalDate endDate;
