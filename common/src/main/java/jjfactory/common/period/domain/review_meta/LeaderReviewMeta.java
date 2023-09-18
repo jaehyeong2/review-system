@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
 
+@Where(clause = "is_deleted is false")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
@@ -18,4 +20,10 @@ public class LeaderReviewMeta {
     private TotalReviewMeta totalReviewMeta;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    private boolean isDeleted;
+
+    public void delete() {
+        isDeleted = true;
+    }
 }

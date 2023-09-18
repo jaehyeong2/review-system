@@ -10,7 +10,7 @@ import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
 
-@Where(clause = "has_read is true")
+@Where(clause = "has_read is false")
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

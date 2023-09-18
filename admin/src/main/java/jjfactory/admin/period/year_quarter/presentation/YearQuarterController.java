@@ -3,8 +3,8 @@ package jjfactory.admin.period.year_quarter.presentation;
 import jjfactory.admin.period.year_quarter.application.YearQuarterFacade;
 import jjfactory.admin.period.year_quarter.presentation.dto.YearQuarterDto;
 import jjfactory.admin.period.year_quarter.presentation.dto.YearQuarterDtoMapper;
+import jjfactory.common.global.response.CommonResponse;
 import jjfactory.common.period.domain.year_quarter.YearQuarterCommand;
-import jjfactory.common.response.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

@@ -5,9 +5,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
 
+@Where(clause = "is_deleted is false")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
@@ -24,6 +26,8 @@ public class PeerReviewMeta {
     private LocalDate addTargetByEvaluatorStartDate;
     private LocalDate addTargetByEvaluatorEndDate;
 
+    private boolean isDeleted;
+
     @Builder
     public PeerReviewMeta(TotalReviewMeta totalReviewMeta, LocalDate startDate, LocalDate endDate, LocalDate addTargetStartDate, LocalDate addTargetEndDate, LocalDate addTargetByEvaluatorStartDate, LocalDate addTargetByEvaluatorEndDate) {
         this.totalReviewMeta = totalReviewMeta;
@@ -33,5 +37,9 @@ public class PeerReviewMeta {
         this.addTargetEndDate = addTargetEndDate;
         this.addTargetByEvaluatorStartDate = addTargetByEvaluatorStartDate;
         this.addTargetByEvaluatorEndDate = addTargetByEvaluatorEndDate;
+    }
+
+    public void delete() {
+        isDeleted = true;
     }
 }

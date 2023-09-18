@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
 
+@Where(clause = "is_deleted is false")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
@@ -25,4 +27,9 @@ public class PerformanceReviewMeta {
     private LocalDate evaluation2ndEndDate;
     private LocalDate reviewConfirmStartDate;
     private LocalDate reviewConfirmEndDate;
+    private boolean isDeleted;
+
+    public void delete() {
+        isDeleted = true;
+    }
 }
