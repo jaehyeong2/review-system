@@ -1,6 +1,6 @@
 package jjfactory.common.review.infra.question;
 
-import jjfactory.common.global.exception.ConflictException;
+import jakarta.persistence.EntityManager;
 import jjfactory.common.review.domain.question.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -17,6 +17,7 @@ public class QuestionnaireFactoryImpl implements QuestionnaireFactory {
     private final CategoryRepository categoryRepository;
     private final QuestionRepository questionRepository;
     private final QuestionnaireReader questionnaireReader;
+    private final EntityManager em;
 
     @Override
     public Questionnaire writeQuestionnaire(QuestionnaireCommand.Create command) {
@@ -35,9 +36,23 @@ public class QuestionnaireFactoryImpl implements QuestionnaireFactory {
 
         return questionnaire;
     }
+
+    @Override
+    public void cloneQuestionnaire(Questionnaire questionnaire) {
+        em.detach(questionnaire);
+        questionnaireRepository.save(questionnaire);
+
+        questionnaire.getCategories().forEach(category -> {
+            categoryRepository.save(category);
+            questionRepository.saveAll(category.getQuestions());
+        });
+    }
+
+
     private Category writeCategory(Category category) {
         return categoryRepository.save(category);
     }
+
     private Question writeQuestion(Question question) {
         return questionRepository.save(question);
     }
@@ -62,21 +77,30 @@ public class QuestionnaireFactoryImpl implements QuestionnaireFactory {
         questionnaire.updateQuestionnaire(command.getTitle(), command.getDescription());
 
         for (QuestionnaireCommand.UpdateCategory categoryCommand : categoryCommands) {
-            Category category = questionnaireReader.getCategoryOrNull(categoryCommand.getId());
-
-            if (category == null) {
+            Category category;
+            if (categoryCommand.getId() == null) {
                 category = writeCategory(categoryCommand.toEntity(questionnaire));
             } else {
-                category.update(categoryCommand.getTitle(), categoryCommand.getDescription(), categoryCommand.getSeq());
+                category = questionnaireReader.getCategoryOrNull(categoryCommand.getId());
+
+                if (category == null) {
+                    category = writeCategory(categoryCommand.toEntity(questionnaire));
+                } else {
+                    category.update(categoryCommand.getTitle(), categoryCommand.getDescription(), categoryCommand.getSeq());
+                }
             }
 
             for (QuestionnaireCommand.UpdateQuestion questionCommand : categoryCommand.getQuestions()) {
-                Question question = questionnaireReader.getQuestionOrNull(questionCommand.getId());
-
-                if (question == null) {
+                if (questionCommand.getId() == null) {
                     writeQuestion(questionCommand.toEntity(category));
                 } else {
-                    question.update(questionCommand.getContent(), questionCommand.getType(), questionCommand.getSeq());
+                    Question question = questionnaireReader.getQuestionOrNull(questionCommand.getId());
+
+                    if (question == null) {
+                        writeQuestion(questionCommand.toEntity(category));
+                    } else {
+                        question.update(questionCommand.getContent(), questionCommand.getType(), questionCommand.getSeq());
+                    }
                 }
             }
         }

@@ -37,7 +37,8 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
     @Override
     public void clone(Long id, Long targetMetaId) {
-
+        Questionnaire questionnaire = questionnaireReader.getQuestionnaire(id);
+        questionnaireFactory.cloneQuestionnaire(questionnaire);
     }
 
     @Transactional(readOnly = true)
