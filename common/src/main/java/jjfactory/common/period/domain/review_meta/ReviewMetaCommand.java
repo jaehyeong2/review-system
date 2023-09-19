@@ -17,8 +17,6 @@ public class ReviewMetaCommand {
         private boolean peerIncluded;
         private boolean leadershipIncluded;
         private boolean selfIncluded;
-        private LocalDate showMenuDate;
-        private LocalDate hideMenuDate;
         private LocalDate showResultDate;
         private long yearQuarterId;
         private CreatePeer peerReviewMata;
@@ -31,8 +29,6 @@ public class ReviewMetaCommand {
                     .peerIncluded(peerIncluded)
                     .leadershipIncluded(leadershipIncluded)
                     .selfIncluded(selfIncluded)
-                    .showMenuDate(showMenuDate)
-                    .hideMenuDate(hideMenuDate)
                     .showResultDate(showResultDate)
                     .yearQuarterId(yearQuarterId)
                     .build();

@@ -34,10 +34,6 @@ public class TotalReviewMeta {
     private boolean leadershipIncluded;
     @Comment("성과 리뷰 포함여부")
     private boolean selfIncluded;
-    @Comment("리뷰 탭 공개일")
-    private LocalDate showMenuDate;
-    @Comment("리뷰 탭 숨김일")
-    private LocalDate hideMenuDate;
     @Comment("리뷰 결과 공개일")
     private LocalDate showResultDate;
     private long yearQuarterId;
@@ -49,13 +45,11 @@ public class TotalReviewMeta {
     private LocalDateTime updateDt;
 
     @Builder
-    public TotalReviewMeta(String name, boolean peerIncluded, boolean leadershipIncluded, boolean selfIncluded, LocalDate showMenuDate, LocalDate hideMenuDate, LocalDate showResultDate, long yearQuarterId) {
+    public TotalReviewMeta(String name, boolean peerIncluded, boolean leadershipIncluded, boolean selfIncluded, LocalDate showResultDate, long yearQuarterId) {
         this.name = name;
         this.peerIncluded = peerIncluded;
         this.leadershipIncluded = leadershipIncluded;
         this.selfIncluded = selfIncluded;
-        this.showMenuDate = showMenuDate;
-        this.hideMenuDate = hideMenuDate;
         this.showResultDate = showResultDate;
         this.yearQuarterId = yearQuarterId;
     }

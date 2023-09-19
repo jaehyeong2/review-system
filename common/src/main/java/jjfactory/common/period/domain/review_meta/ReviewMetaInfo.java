@@ -12,6 +12,7 @@ public class ReviewMetaInfo {
     @Data
     public static class ListResponse{
         private Long id;
+        private String name;
     }
 
     @Builder
