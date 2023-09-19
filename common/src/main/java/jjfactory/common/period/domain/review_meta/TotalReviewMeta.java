@@ -24,16 +24,16 @@ public class TotalReviewMeta {
     @OneToOne(mappedBy = "totalReviewMeta")
     private PeerReviewMeta peerReviewMeta;
     @OneToOne(mappedBy = "totalReviewMeta")
-    private PerformanceReviewMeta performanceReviewMeta;
+    private SelfReviewMeta selfReviewMeta;
     @OneToOne(mappedBy = "totalReviewMeta")
-    private LeaderReviewMeta leaderReviewMeta;
+    private LeadershipReviewMeta leadershipReviewMeta;
     private String name;
     @Comment("동료 리뷰 포함여부")
-    private boolean reviewPeerIncluded;
+    private boolean peerIncluded;
     @Comment("리더십 리뷰 포함여부")
-    private boolean reviewLeaderIncluded;
+    private boolean leadershipIncluded;
     @Comment("성과 리뷰 포함여부")
-    private boolean reviewSelfIncluded;
+    private boolean selfIncluded;
     @Comment("리뷰 탭 공개일")
     private LocalDate showMenuDate;
     @Comment("리뷰 탭 숨김일")
@@ -49,11 +49,11 @@ public class TotalReviewMeta {
     private LocalDateTime updateDt;
 
     @Builder
-    public TotalReviewMeta(String name, boolean reviewPeerIncluded, boolean reviewLeaderIncluded, boolean reviewSelfIncluded, LocalDate showMenuDate, LocalDate hideMenuDate, LocalDate showResultDate, long yearQuarterId) {
+    public TotalReviewMeta(String name, boolean peerIncluded, boolean leadershipIncluded, boolean selfIncluded, LocalDate showMenuDate, LocalDate hideMenuDate, LocalDate showResultDate, long yearQuarterId) {
         this.name = name;
-        this.reviewPeerIncluded = reviewPeerIncluded;
-        this.reviewLeaderIncluded = reviewLeaderIncluded;
-        this.reviewSelfIncluded = reviewSelfIncluded;
+        this.peerIncluded = peerIncluded;
+        this.leadershipIncluded = leadershipIncluded;
+        this.selfIncluded = selfIncluded;
         this.showMenuDate = showMenuDate;
         this.hideMenuDate = hideMenuDate;
         this.showResultDate = showResultDate;
@@ -62,9 +62,9 @@ public class TotalReviewMeta {
 
     public void delete(){
         isDeleted = true;
-        performanceReviewMeta.delete();
+        selfReviewMeta.delete();
         peerReviewMeta.delete();
-        leaderReviewMeta.delete();
+        leadershipReviewMeta.delete();
     }
 
 }

@@ -33,7 +33,7 @@ public class QuestionnaireInfo {
         private String title;
         private LocalDateTime createDt;
         private LocalDateTime updateDt;
-        private List<CategoryInfo> categories = new ArrayList<>();
+        private List<CategoryInfo> categories;
     }
 
     @Builder
@@ -45,7 +45,7 @@ public class QuestionnaireInfo {
         private String title;
         private String description;
         private int seq;
-        private List<QuestionInfo> questions = new ArrayList<>();
+        private List<QuestionInfo> questions;
     }
 
     @Builder

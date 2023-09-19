@@ -17,7 +17,7 @@ public class QuestionnaireCommand {
         private String title;
         private String description;
         private long metaId;
-        private Set<CreateCategory> categories = new HashSet();
+        private Set<CreateCategory> categories;
 
         public Questionnaire toEntity(){
             return Questionnaire.builder()
@@ -35,7 +35,7 @@ public class QuestionnaireCommand {
     public static class Update {
         private String title;
         private String description;
-        private Set<UpdateCategory> categories = new HashSet();
+        private Set<UpdateCategory> categories;
     }
 
     @Builder
@@ -46,7 +46,7 @@ public class QuestionnaireCommand {
         private String title;
         private String description;
         private int seq;
-        private Set<CreateQuestion> questions = new HashSet();
+        private Set<CreateQuestion> questions;
 
         public Category toEntity(Questionnaire questionnaire){
             return Category.builder()
@@ -67,7 +67,7 @@ public class QuestionnaireCommand {
         private String title;
         private String description;
         private int seq;
-        private Set<UpdateQuestion> questions = new HashSet();
+        private Set<UpdateQuestion> questions;
 
         public Category toEntity(Questionnaire questionnaire){
             return Category.builder()

@@ -11,7 +11,7 @@ public class ReviewMetaInfo {
     @NoArgsConstructor
     @Data
     public static class ListResponse{
-
+        private Long id;
     }
 
     @Builder
@@ -19,7 +19,7 @@ public class ReviewMetaInfo {
     @NoArgsConstructor
     @Data
     public static class DetailResponse{
-
+        private Long id;
     }
 
 }

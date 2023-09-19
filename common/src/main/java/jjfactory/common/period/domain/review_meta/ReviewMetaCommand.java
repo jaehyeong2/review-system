@@ -14,23 +14,27 @@ public class ReviewMetaCommand {
     @Data
     public static class Create {
         private String name;
-        private boolean reviewPeerIncluded;
-        private boolean reviewLeaderIncluded;
-        private boolean reviewSelfIncluded;
+        private boolean peerIncluded;
+        private boolean leadershipIncluded;
+        private boolean selfIncluded;
         private LocalDate showMenuDate;
         private LocalDate hideMenuDate;
         private LocalDate showResultDate;
         private long yearQuarterId;
+        private CreatePeer peerReviewMata;
+        private CreateSelf selfReviewMeta;
+        private CreateLeadership leadershipReviewMeta;
 
         public TotalReviewMeta toEntity(){
             return TotalReviewMeta.builder()
                     .name(name)
-                    .reviewPeerIncluded(reviewPeerIncluded)
-                    .reviewLeaderIncluded(reviewLeaderIncluded)
-                    .reviewSelfIncluded(reviewSelfIncluded)
+                    .peerIncluded(peerIncluded)
+                    .leadershipIncluded(leadershipIncluded)
+                    .selfIncluded(selfIncluded)
                     .showMenuDate(showMenuDate)
                     .hideMenuDate(hideMenuDate)
                     .showResultDate(showResultDate)
+                    .yearQuarterId(yearQuarterId)
                     .build();
         }
     }
@@ -40,7 +44,74 @@ public class ReviewMetaCommand {
     @NoArgsConstructor
     @Data
     public static class Update {
+        private Long id;
+    }
 
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class CreatePeer {
+        private LocalDate startDate;
+        private LocalDate endDate;
+        private LocalDate addTargetStartDate;
+        private LocalDate addTargetEndDate;
+        private LocalDate addTargetByEvaluatorStartDate;
+        private LocalDate addTargetByEvaluatorEndDate;
+
+        public PeerReviewMeta toEntity(TotalReviewMeta totalReviewMeta){
+            return PeerReviewMeta.builder()
+                    .totalReviewMeta(totalReviewMeta)
+                    .startDate(startDate)
+                    .endDate(endDate)
+                    .addTargetStartDate(addTargetStartDate)
+                    .addTargetEndDate(addTargetEndDate)
+                    .addTargetByEvaluatorStartDate(addTargetByEvaluatorStartDate)
+                    .addTargetByEvaluatorEndDate(addTargetByEvaluatorEndDate)
+                    .build();
+        }
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class CreateSelf {
+        private LocalDate startDate;
+        private LocalDate endDate;
+        private LocalDate firstEvalStartDate;
+        private LocalDate firstEvalEndDate;
+        private LocalDate finalEvalStartDate;
+        private LocalDate finalEvalEndDate;
+
+        public SelfReviewMeta toEntity(TotalReviewMeta totalReviewMeta){
+            return SelfReviewMeta.builder()
+                    .totalReviewMeta(totalReviewMeta)
+                    .startDate(startDate)
+                    .endDate(endDate)
+                    .firstEvalStartDate(firstEvalStartDate)
+                    .finalEvalEndDate(finalEvalEndDate)
+                    .finalEvalStartDate(finalEvalStartDate)
+                    .finalEvalEndDate(firstEvalEndDate)
+                    .build();
+        }
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class CreateLeadership {
+        private LocalDate startDate;
+        private LocalDate endDate;
+
+        public LeadershipReviewMeta toEntity(TotalReviewMeta totalReviewMeta){
+            return LeadershipReviewMeta.builder()
+                    .totalReviewMeta(totalReviewMeta)
+                    .startDate(startDate)
+                    .endDate(endDate)
+                    .build();
+        }
     }
 
 }

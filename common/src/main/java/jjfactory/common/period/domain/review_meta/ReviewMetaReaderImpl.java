@@ -4,7 +4,7 @@ package jjfactory.common.period.domain.review_meta;
 import jjfactory.common.global.exception.ResourceNotFoundException;
 import jjfactory.common.period.infra.review_meta.LeaderReviewMetaRepository;
 import jjfactory.common.period.infra.review_meta.PeerReviewMetaRepository;
-import jjfactory.common.period.infra.review_meta.PerformanceReviewMetaRepository;
+import jjfactory.common.period.infra.review_meta.SelfReviewMetaRepository;
 import jjfactory.common.period.infra.review_meta.TotalReviewMetaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReviewMetaReaderImpl implements ReviewMetaReader {
     private final TotalReviewMetaRepository totalReviewMetaRepository;
-    private final PerformanceReviewMetaRepository performanceReviewMetaRepository;
+    private final SelfReviewMetaRepository selfReviewMetaRepository;
     private final PeerReviewMetaRepository peerReviewMetaRepository;
     private final LeaderReviewMetaRepository leaderReviewMetaRepository;
     @Override
@@ -31,15 +31,15 @@ public class ReviewMetaReaderImpl implements ReviewMetaReader {
     }
 
     @Override
-    public LeaderReviewMeta getLeaderReviewMeta(Long id) {
+    public LeadershipReviewMeta getLeaderReviewMeta(Long id) {
         return leaderReviewMetaRepository.findById(id).orElseThrow(() -> {
             throw new ResourceNotFoundException("review not found");
         });
     }
 
     @Override
-    public PerformanceReviewMeta getPerformanceReviewMeta(Long id) {
-        return performanceReviewMetaRepository.findById(id).orElseThrow(() -> {
+    public SelfReviewMeta getSelfReviewMeta(Long id) {
+        return selfReviewMetaRepository.findById(id).orElseThrow(() -> {
             throw new ResourceNotFoundException("review not found");
         });
     }
