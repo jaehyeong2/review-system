@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<UserInfo.ListResponse> getAllUsers(Pageable pageable) {
-        return userReader.getUsers(pageable).map(userMapper::ofListResponse);
+    public Page<UserInfo.ListResponse> getAllUsers(Pageable pageable, UserCondition condition) {
+        return userReader.getUsers(pageable, condition).map(userMapper::ofListResponse);
     }
 
     @Transactional(readOnly = true)

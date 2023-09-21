@@ -1,5 +1,9 @@
 package jjfactory.common.user.domain;
 
+import jjfactory.common.organization.domain.Organization;
+import jjfactory.common.organization.domain.team.Team;
+import jjfactory.common.organization.infra.OrganizationRepository;
+import jjfactory.common.organization.infra.team.TeamRepository;
 import jjfactory.common.user.infra.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,19 +26,37 @@ class UserServiceImplTest {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    private OrganizationRepository organizationRepository;
+    @Autowired
+    private TeamRepository teamRepository;
 
     @Test
-    void getPage(){
+    void getPage() {
         //given
-        for(int i = 1; i < 31; i++){
-            User user = User.builder().name("user" + i).build();
+        Organization organization = Organization.builder()
+                .build();
+
+        organizationRepository.save(organization);
+
+        Team team = Team.builder()
+                .organization(organization)
+                .name("team")
+                .build();
+
+        teamRepository.save(team);
+
+        for (int i = 1; i < 31; i++) {
+            User user = User.builder().name("user" + i)
+                    .teamId(team.getId())
+                    .build();
             userRepository.save(user);
         }
 
         Pageable request = PageRequest.of(0, 3);
 
         //when
-        Page<UserInfo.ListResponse> result = userService.getAllUsers(request);
+        Page<UserInfo.ListResponse> result = userService.getAllUsers(request, null);
 
         //then
         assertThat(result.getTotalElements()).isEqualTo(30);

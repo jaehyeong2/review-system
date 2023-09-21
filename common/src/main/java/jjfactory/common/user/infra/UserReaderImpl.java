@@ -2,6 +2,7 @@ package jjfactory.common.user.infra;
 
 import jjfactory.common.global.exception.ResourceNotFoundException;
 import jjfactory.common.user.domain.User;
+import jjfactory.common.user.domain.UserCondition;
 import jjfactory.common.user.domain.UserReader;
 import jjfactory.common.user.infra.team.UserDslRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class UserReaderImpl implements UserReader {
     }
 
     @Override
-    public Page<User> getUsers(Pageable pageable){
-        return userDslRepository.getUsers(pageable);
+    public Page<User> getUsers(Pageable pageable, UserCondition condition){
+        return userDslRepository.getUsers(pageable, condition);
     }
 }

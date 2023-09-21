@@ -11,8 +11,7 @@ public interface UserService {
     Long delete(Long id);
 
     UserInfo.DetailResponse get(Long id);
-    Page<UserInfo.ListResponse> getAllUsers(Pageable pageable);
-
+    Page<UserInfo.ListResponse> getAllUsers(Pageable pageable, UserCondition condition);
     List<UserInfo.ListResponse> getTeamUsers(Long userId);
 
     Long update(UserCommand.Update command, Long userId);

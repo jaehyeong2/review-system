@@ -2,6 +2,7 @@ package jjfactory.common.organization.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,4 +28,10 @@ public class Organization {
     @UpdateTimestamp
     private LocalDateTime updateDt;
 
+    @Builder
+    public Organization(Long yearQuarterId, String name, String code) {
+        this.yearQuarterId = yearQuarterId;
+        this.name = name;
+        this.code = code;
+    }
 }

@@ -8,5 +8,5 @@ import java.util.List;
 public interface UserReader {
     User get(Long id);
     List<User> getUsersByTeamId(Long teamId);
-    Page<User> getUsers(Pageable pageable);
+    Page<User> getUsers(Pageable pageable, UserCondition condition);
 }
