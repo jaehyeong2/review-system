@@ -32,6 +32,7 @@ class UserServiceImplTest {
     private TeamRepository teamRepository;
 
     @Test
+    @DisplayName("유저 페이징 조회 성공")
     void getPage() {
         //given
         Organization organization = Organization.builder()
@@ -44,26 +45,46 @@ class UserServiceImplTest {
                 .name("team")
                 .build();
 
+        Team team2 = Team.builder()
+                .organization(organization)
+                .name("team2")
+                .build();
+
         teamRepository.save(team);
+        teamRepository.save(team2);
+
 
         for (int i = 1; i < 31; i++) {
-            User user = User.builder().name("user" + i)
-                    .teamId(team.getId())
-                    .build();
-            userRepository.save(user);
+            if(i % 2 == 0){
+                User user = User.builder().name("user" + i)
+                        .teamId(team.getId())
+                        .build();
+                userRepository.save(user);
+            }else{
+                User user = User.builder().name("user" + i)
+                        .teamId(team2.getId())
+                        .build();
+                userRepository.save(user);
+            }
         }
 
         Pageable request = PageRequest.of(0, 3);
 
+        UserCondition condition = UserCondition.builder()
+                .name("user")
+                .teamName("team2")
+                .build();
+
         //when
-        Page<UserInfo.ListResponse> result = userService.getAllUsers(request, null);
+        Page<UserInfo.ListResponse> result = userService.getAllUsers(request, condition);
 
         //then
-        assertThat(result.getTotalElements()).isEqualTo(30);
-        assertThat(result.getTotalPages()).isEqualTo(10);
+        assertThat(result.getTotalElements()).isEqualTo(15);
+        assertThat(result.getTotalPages()).isEqualTo(5);
     }
 
     @Test
+    @DisplayName("유저 생성 성공")
     void create() {
         //given
         UserCommand.Create createCommand = UserCommand.Create
@@ -78,6 +99,7 @@ class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("유저 삭제 시 invalid 된다.")
     void delete() {
         //given
         User lee = User.builder()
@@ -95,6 +117,7 @@ class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("유저 상세조회 성공")
     void get() {
         //given
         User lee = User.builder()
@@ -135,6 +158,7 @@ class UserServiceImplTest {
     }
 
     @Test
+    @DisplayName("유저 업데이트 성공")
     void update() {
         //given
         User lee = User.builder()

@@ -37,10 +37,10 @@ public class UserDslRepository {
         List<User> content = queryFactory.selectFrom(user)
                 .join(team).on(user.teamId.eq(team.id))
                 .join(organization).on(team.organization.eq(organization))
-                .where(userNameEq(condition),
-                        userEmpNumEq(condition),
-                        teamNameEq(condition),
-                        organizationNameEq(condition))
+                .where(userNameContains(condition),
+                        userEmpNumContains(condition),
+                        teamNameContains(condition),
+                        organizationNameContains(condition))
                 .limit(pageable.getPageSize())
                 .offset(pageable.getOffset())
                 .fetch();
@@ -49,10 +49,10 @@ public class UserDslRepository {
                 .from(user)
                 .join(team).on(user.teamId.eq(team.id))
                 .join(organization).on(team.organization.eq(organization))
-                .where(userNameEq(condition),
-                        userEmpNumEq(condition),
-                        teamNameEq(condition),
-                        organizationNameEq(condition))
+                .where(userNameContains(condition),
+                        userEmpNumContains(condition),
+                        teamNameContains(condition),
+                        organizationNameContains(condition))
                 .from(user)
                 .limit(pageable.getPageSize())
                 .offset(pageable.getOffset())
@@ -61,23 +61,23 @@ public class UserDslRepository {
         return new PageImpl<>(content, pageable, total);
     }
 
-    private static BooleanExpression organizationNameEq(UserCondition condition) {
+    private static BooleanExpression organizationNameContains(UserCondition condition) {
         if (condition == null || !StringUtils.hasText(condition.getOrganizationName())) return null;
-        return organization.name.eq(condition.getOrganizationName());
+        return organization.name.contains(condition.getOrganizationName());
     }
 
-    private static BooleanExpression teamNameEq(UserCondition condition) {
+    private static BooleanExpression teamNameContains(UserCondition condition) {
         if (condition == null || !StringUtils.hasText(condition.getTeamName())) return null;
-        return team.name.eq(condition.getTeamName());
+        return team.name.contains(condition.getTeamName());
     }
 
-    private static BooleanExpression userEmpNumEq(UserCondition condition) {
+    private static BooleanExpression userEmpNumContains(UserCondition condition) {
         if (condition == null || !StringUtils.hasText(condition.getEmployeeNumber())) return null;
-        return user.employeeNumber.eq(condition.getEmployeeNumber());
+        return user.employeeNumber.contains(condition.getEmployeeNumber());
     }
 
-    private static BooleanExpression userNameEq(UserCondition condition) {
+    private static BooleanExpression userNameContains(UserCondition condition) {
         if (condition == null || !StringUtils.hasText(condition.getName())) return null;
-        return user.name.eq(condition.getName());
+        return user.name.contains(condition.getName());
     }
 }
