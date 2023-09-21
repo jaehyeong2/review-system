@@ -1,6 +1,8 @@
 package jjfactory.common.user.domain;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +39,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserInfo.DetailResponse get(Long id) {
         return userMapper.of(userReader.get(id));
+    }
+
+    @Override
+    public Page<UserInfo.ListResponse> getAllUsers(Pageable pageable) {
+        return userReader.getUsers(pageable).map(userMapper::ofListResponse);
     }
 
     @Transactional(readOnly = true)

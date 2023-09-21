@@ -1,6 +1,6 @@
 package jjfactory.common.user.domain.team;
 
-import jjfactory.common.user.infra.team.UserTeamDslRepository;
+import jjfactory.common.user.infra.team.UserDslRepository;
 import jjfactory.common.user.infra.team.UserTeamHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,10 +12,10 @@ import java.util.List;
 @Component
 public class UserTeamHistoryReaderImpl implements UserTeamHistoryReader {
     private final UserTeamHistoryRepository userTeamHistoryRepository;
-    private final UserTeamDslRepository userTeamDslRepository;
+    private final UserDslRepository userDslRepository;
     @Override
     public UserTeamHistory findOneByUserIdAndYearQuarterId(Long userId, Long yearQuarterId){
-        return userTeamDslRepository.findTeamIdByUserIdAndYearQuarterId(userId, yearQuarterId);
+        return userDslRepository.findTeamIdByUserIdAndYearQuarterId(userId, yearQuarterId);
     }
 
     @Override

@@ -5,6 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -19,6 +22,24 @@ class UserServiceImplTest {
 
     @Autowired
     UserRepository userRepository;
+
+    @Test
+    void getPage(){
+        //given
+        for(int i = 1; i < 31; i++){
+            User user = User.builder().name("user" + i).build();
+            userRepository.save(user);
+        }
+
+        Pageable request = PageRequest.of(0, 3);
+
+        //when
+        Page<UserInfo.ListResponse> result = userService.getAllUsers(request);
+
+        //then
+        assertThat(result.getTotalElements()).isEqualTo(30);
+        assertThat(result.getTotalPages()).isEqualTo(10);
+    }
 
     @Test
     void create() {
