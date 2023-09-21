@@ -1,7 +1,8 @@
-package jjfactory.common.review.domain.leader;
+package jjfactory.common.review.infra.leader;
 
 import jjfactory.common.global.exception.ResourceNotFoundException;
-import jjfactory.common.review.infra.leader.EvaluateInfoRepository;
+import jjfactory.common.review.domain.leader.EvaluateInfo;
+import jjfactory.common.review.domain.leader.EvaluateInfoReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +36,6 @@ public class EvaluateInfoReaderImpl implements EvaluateInfoReader {
 
     @Override
     public List<EvaluateInfo> getByEvaluatorIdAndMetaId(Long evaluatorId, Long metaId) {
-        return evaluateInfoRepository.findAllByEvaluatorIdAAndMetaId(evaluatorId, metaId);
+        return evaluateInfoRepository.findAllByEvaluatorIdAndMetaId(evaluatorId, metaId);
     }
 }
