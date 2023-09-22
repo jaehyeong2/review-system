@@ -3,6 +3,7 @@ package jjfactory.admin.user.presentation;
 import jjfactory.admin.user.application.UserFacade;
 import jjfactory.admin.user.presentation.dto.UserDto;
 import jjfactory.admin.user.presentation.dto.UserDtoMapper;
+import jjfactory.common.global.response.CommonPagingResponse;
 import jjfactory.common.global.response.CommonResponse;
 import jjfactory.common.user.domain.UserCommand;
 import jjfactory.common.user.domain.UserCondition;
@@ -12,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 @RestController
 public class UserController {
@@ -25,8 +26,10 @@ public class UserController {
     }
 
     @GetMapping
-    public Page<UserDto.ListResponse> getList(@PageableDefault Pageable pageable, UserCondition condition) {
-        return userFacade.getList(pageable, condition).map(userDtoMapper::of);
+    public CommonPagingResponse<UserDto.ListResponse> getPage(@PageableDefault Pageable pageable, UserCondition condition) {
+        Page<UserDto.ListResponse> result = userFacade.getPage(pageable, condition).map(userDtoMapper::of);
+
+        return new CommonPagingResponse<>(result);
     }
 
     @PostMapping

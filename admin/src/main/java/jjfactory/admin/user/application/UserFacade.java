@@ -18,7 +18,7 @@ public class UserFacade {
         return userService.get(id);
     }
 
-    public Page<UserInfo.ListResponse> getList(Pageable pageable, UserCondition condition){
+    public Page<UserInfo.ListResponse> getPage(Pageable pageable, UserCondition condition){
         return userService.getAllUsers(pageable, condition);
     }
 
