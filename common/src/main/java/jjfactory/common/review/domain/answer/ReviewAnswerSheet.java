@@ -1,6 +1,7 @@
 package jjfactory.common.review.domain.answer;
 
 import jakarta.persistence.*;
+import jjfactory.common.feedback.domain.Feedback;
 import jjfactory.common.review.domain.ReviewType;
 import lombok.*;
 import org.hibernate.annotations.Comment;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -39,6 +41,19 @@ public class ReviewAnswerSheet {
     private LocalDateTime createDt;
     @UpdateTimestamp
     private LocalDateTime updateDt;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ReviewAnswerSheet that = (ReviewAnswerSheet) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     public enum Status{
         NOT_STARTED, TEMP, COMPLETE

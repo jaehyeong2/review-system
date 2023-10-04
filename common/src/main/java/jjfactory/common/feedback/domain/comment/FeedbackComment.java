@@ -14,6 +14,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @DynamicUpdate
 @Getter
@@ -35,6 +36,19 @@ public class FeedbackComment {
     private LocalDateTime createDt;
     @UpdateTimestamp
     private LocalDateTime updateDt;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FeedbackComment that = (FeedbackComment) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Builder
     public FeedbackComment(Feedback feedback, Long userId, String content) {

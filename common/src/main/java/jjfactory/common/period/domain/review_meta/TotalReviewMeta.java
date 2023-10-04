@@ -1,6 +1,7 @@
 package jjfactory.common.period.domain.review_meta;
 
 import jakarta.persistence.*;
+import jjfactory.common.feedback.domain.Feedback;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Where(clause = "is_deleted is false")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -43,6 +45,19 @@ public class TotalReviewMeta {
     private LocalDateTime createDt;
     @UpdateTimestamp
     private LocalDateTime updateDt;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TotalReviewMeta that = (TotalReviewMeta) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Builder
     public TotalReviewMeta(String name, boolean peerIncluded, boolean leadershipIncluded, boolean selfIncluded, LocalDate showResultDate, long yearQuarterId) {

@@ -1,6 +1,7 @@
 package jjfactory.common.period.domain.year_quarter;
 
 import jakarta.persistence.*;
+import jjfactory.common.feedback.domain.Feedback;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @DynamicUpdate
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -33,6 +35,19 @@ public class YearQuarter {
     private LocalDateTime createDt;
     @UpdateTimestamp
     private LocalDateTime updateDt;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        YearQuarter that = (YearQuarter) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Builder
     public YearQuarter(int year, int quarter, boolean isOpen, LocalDateTime startDt, LocalDateTime endDt) {

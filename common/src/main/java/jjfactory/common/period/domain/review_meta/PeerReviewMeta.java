@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Where(clause = "is_deleted is false")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -27,6 +28,19 @@ public class PeerReviewMeta {
     private LocalDate addTargetByEvaluatorEndDate;
 
     private boolean isDeleted;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PeerReviewMeta that = (PeerReviewMeta) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Builder
     public PeerReviewMeta(TotalReviewMeta totalReviewMeta, LocalDate startDate, LocalDate endDate, LocalDate addTargetStartDate, LocalDate addTargetEndDate, LocalDate addTargetByEvaluatorStartDate, LocalDate addTargetByEvaluatorEndDate) {

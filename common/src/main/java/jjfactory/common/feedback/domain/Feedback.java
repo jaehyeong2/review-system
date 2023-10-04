@@ -3,6 +3,7 @@ package jjfactory.common.feedback.domain;
 import jakarta.persistence.*;
 import jjfactory.common.feedback.domain.comment.FeedbackComment;
 import jjfactory.common.feedback.domain.like.FeedbackLike;
+import jjfactory.common.period.domain.review_meta.SelfReviewMeta;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import org.springframework.util.StringUtils;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -49,6 +51,18 @@ public class Feedback {
     @UpdateTimestamp
     private LocalDateTime updateDt;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Feedback that = (Feedback) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Builder
     public Feedback(Long sendUserId, Long receiveUserId, String content, Type type) {

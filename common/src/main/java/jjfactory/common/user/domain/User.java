@@ -1,6 +1,7 @@
 package jjfactory.common.user.domain;
 
 import jakarta.persistence.*;
+import jjfactory.common.feedback.domain.Feedback;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Where(clause = "is_valid is true")
 @Getter
@@ -37,6 +39,19 @@ public class User {
     private LocalDateTime createDt;
     @UpdateTimestamp
     private LocalDateTime updateDt;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User that = (User) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Builder
     public User(Long teamId, String name, String username, String email, String employeeNumber) {

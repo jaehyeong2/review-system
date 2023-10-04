@@ -1,6 +1,7 @@
 package jjfactory.common.feedback.domain.comment.like;
 
 import jakarta.persistence.*;
+import jjfactory.common.feedback.domain.Feedback;
 import jjfactory.common.feedback.domain.comment.FeedbackComment;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -26,6 +28,19 @@ public class FeedbackCommentLike {
     private LocalDateTime createDt;
     @UpdateTimestamp
     private LocalDateTime updateDt;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FeedbackCommentLike that = (FeedbackCommentLike) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Builder
     public FeedbackCommentLike(FeedbackComment feedbackComment, Long userId) {
